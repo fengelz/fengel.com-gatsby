@@ -6,7 +6,6 @@ import '../../node_modules/normalize.css/normalize.css'
 import './index.scss'
 import Master from '../components/atoms/Master'
 import Aside from '../components/molecules/Aside'
-import { queryTags, queryCategories } from '../queries'
 
 const Layout = ({ children, data }) => (
   <div>

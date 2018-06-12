@@ -4,7 +4,6 @@ import Posts from '../components/organisms/Posts'
 
 const IndexPage = ({ data }) => (
   <div>
-    {console.dir(data)}
     <Posts posts={data.allWordpressPost.edges} />
   </div>
 )
@@ -16,6 +15,7 @@ export const homePageQuery = graphql`
     allWordpressPost(sort: { fields: [date] }) {
       edges {
         node {
+          id
           title
           excerpt
           slug

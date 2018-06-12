@@ -1,9 +1,13 @@
-import Remarkable from 'remarkable'
+import React from 'react'
 import renderHTML from 'react-render-html'
 
 function Html(props) {
-  const content = props.content.substr(0, props.content.length - 1)
-  return renderHTML(content)
+  const content = props.content
+  return props.embed ? (
+    <div> {renderHTML(props.content)} </div>
+  ) : (
+    renderHTML(props.content)
+  )
 }
 
 export default Html

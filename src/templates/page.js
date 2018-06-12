@@ -12,18 +12,12 @@ const SecondPage = ({ data }) => (
 
 export default SecondPage
 
-// export const query = graphql`
-//   query allPosts {
-//     allWordpressPost {
-//       edges {
-//         node {
-//           id
-//           title
-//           slug
-//           excerpt
-//           date
-//         }
-//       }
-//     }
-//   }
-// `
+export const query = graphql`
+  query SinglePage($slug: String!) {
+    wordpressPost(slug: { eq: "$slug" }) {
+      title
+      content
+      date
+    }
+  }
+`

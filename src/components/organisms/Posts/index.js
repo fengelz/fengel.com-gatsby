@@ -12,7 +12,6 @@ class Posts extends React.Component {
     return (
       <div className="org-a9ca065c-a467-47bb-a252-2138bff1cb1d">
         {posts.map(post => {
-          console.log(post)
           post = post.node
           moment.locale('DA')
           return (
@@ -21,7 +20,7 @@ class Posts extends React.Component {
                 <Link to={`/${post.slug}`}>{post.title}</Link>
               </h2>
 
-              <Html content={post.excerpt} />
+              <Html content={post.excerpt} embed={true} />
               <time>{moment(post.date).format('Do MMM YYYY')}</time>
             </div>
           )
