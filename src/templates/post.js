@@ -11,7 +11,7 @@ class PostTemplate extends React.Component {
 export default PostTemplate
 
 export const pageQuery = graphql`
-  query singlePostQuery($slug: String!) {
+  query SinglePostQuery($slug: String!) {
     wordpressPost(slug: { eq: $slug }) {
       title
       content

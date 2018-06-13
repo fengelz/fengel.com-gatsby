@@ -21,7 +21,7 @@ class Aside extends React.PureComponent {
                   cat = cat.node
                   return (
                     <li key={cat.id}>
-                      <Link to={`/categories/${cat.slug}`}>{cat.name}</Link>
+                      <Link to={`/category/${cat.slug}`}>{cat.name}</Link>
                     </li>
                   )
                 })}
@@ -36,7 +36,7 @@ class Aside extends React.PureComponent {
                   tag = tag.node
                   return (
                     <li key={tag.id}>
-                      <Link to={`/tags/${tag.slug}`}>{tag.name}</Link>
+                      <Link to={`/tag/${tag.slug}`}>{tag.name}</Link>
                     </li>
                   )
                 })}
