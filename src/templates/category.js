@@ -22,6 +22,7 @@ export const pageQuery = graphql`
           title
           excerpt
           slug
+          date
         }
       }
     }
