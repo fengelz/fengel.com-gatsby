@@ -1,7 +1,5 @@
 import React from 'react'
 
-import queryPostsByTagSlug from '../queries'
-
 import Posts from '../components/organisms/Posts'
 
 class TagTemplate extends React.Component {
@@ -17,8 +15,8 @@ class TagTemplate extends React.Component {
 export default TagTemplate
 
 export const pageQuery = graphql`
-  query PostsByTag($slug: String!) {
-    allWordpressPost(filter: { tags: { slug: { eq: $slug } } }) {
+  query PostsByCategory($slug: String!) {
+    allWordpressPost(filter: { categories: { slug: { eq: $slug } } }) {
       edges {
         node {
           title

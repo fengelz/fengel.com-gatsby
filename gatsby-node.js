@@ -2,29 +2,14 @@ const _ = require(`lodash`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const slash = require(`slash`)
+const queries = require('./src/queries')
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
   return new Promise((resolve, reject) => {
     console.log('Create pages')
     resolve(
-      graphql(
-        `
-          query createPostPages {
-            allWordpressPost(sort: { fields: [date] }) {
-              edges {
-                node {
-                  title
-                  excerpt
-                  slug
-                  date
-                  content
-                }
-              }
-            }
-          }
-        `
-      )
+      graphql(queries.queryAllPosts)
         .then(result => {
           if (result.errors) {
             reject(result.errors)
@@ -42,21 +27,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         })
         .then(() => {
           console.log('Create tags')
-          graphql(
-            `
-              query createTagPages {
-                allWordpressTag {
-                  edges {
-                    node {
-                      id
-                      name
-                      slug
-                    }
-                  }
-                }
-              }
-            `
-          ).then(result => {
+          graphql(queries.queryAllTags).then(result => {
             if (result.errors) {
               reject(result.errors)
             }
@@ -65,6 +36,24 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               createPage({
                 path: `/tag/${edge.node.slug}`,
                 component: slash(TagTemplate),
+                context: {
+                  slug: edge.node.slug,
+                },
+              })
+            })
+          })
+        })
+        .then(() => {
+          console.log('Create categories')
+          graphql(queries.queryAllCategories).then(result => {
+            if (result.errors) {
+              reject(result.errors)
+            }
+            const CatTemplate = path.resolve(`./src/templates/category.js`)
+            _.each(result.data.allWordpressCategory.edges, edge => {
+              createPage({
+                path: `/category/${edge.node.slug}`,
+                component: slash(CatTemplate),
                 context: {
                   slug: edge.node.slug,
                 },
